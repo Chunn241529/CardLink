@@ -34,7 +34,6 @@ if (profileId !== null) {
         .then((snapshot) => {
             if (snapshot.exists()) {
                 const profile = snapshot.val();
-
                 editProfileForm.elements["profile-id"].value = profileId;
                 editProfileForm.elements["name"].value = profile.name;
                 editProfileForm.elements["phone"].value = profile.phone;
@@ -42,7 +41,7 @@ if (profileId !== null) {
                 editProfileForm.elements["description"].value = profile.description; // Thêm trường Description
                 editProfileForm.elements["facebook"].value = profile.facebook;
                 editProfileForm.elements["linkedin"].value = profile.linkedin; // Thay đổi trường zalo thành linkedin
-
+             
                 // Bắt sự kiện khi bấm nút "Lưu"
                 editProfileForm.addEventListener("submit", (event) => {
                     event.preventDefault();
