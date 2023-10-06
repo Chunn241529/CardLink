@@ -21,6 +21,8 @@ const database = getDatabase(app); // Khởi tạo Firebase Realtime Database
 
 const addProfileForm = document.getElementById("add-profile-form");
 const backToDetailButton = document.getElementById("back-to-detail");
+const urlParams = new URLSearchParams(window.location.search);
+const profileId = urlParams.get("id");
 
 addProfileForm.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -34,6 +36,7 @@ addProfileForm.addEventListener("submit", (event) => {
 
             const profile = {
                 image: imageData,
+                template: addProfileForm.elements["template"].value,
                 name: addProfileForm.elements["name"].value,
                 phone: addProfileForm.elements["phone"].value,
                 roleUser: addProfileForm.elements["role-user"].value, // Thêm trường RoleUser
@@ -45,9 +48,14 @@ addProfileForm.addEventListener("submit", (event) => {
             // Lưu dữ liệu vào Firebase Realtime Database
             const profilesRef = ref(database, 'profiles'); // Tham chiếu đến 'profiles' trong cơ sở dữ liệu
             push(profilesRef, profile)
-                .then(() => {
-                    console.log("Dữ liệu đã được lưu vào Firebase thành công.");
-                    window.location.href = "index.html";
+                .then((newProfileRef) => {
+                    alert("Dữ liệu đã được lưu thành công.");
+                    const newProfileId = newProfileRef.key;
+                    if (profile.template === 'template1') {
+                        window.location.href = `detail.html?id=${newProfileId}`;
+                    } else if (profile.template === 'template2') {
+                        window.location.href = `card2.html?id=${newProfileId}`;
+                    }
                 })
                 .catch((error) => {
                     console.error("Lỗi khi lưu dữ liệu vào Firebase:", error);
@@ -60,6 +68,14 @@ addProfileForm.addEventListener("submit", (event) => {
     }
 });
 
+
 backToDetailButton.addEventListener("click", () => {
     window.location.href = "index.html";
 });
+// const templateSelect = document.getElementById("template");
+// const templateField = document.getElementById("templateField");
+
+// templateSelect.addEventListener("change", () => {
+//     const selectedTemplate = templateSelect.value;
+//     templateField.value = selectedTemplate; // Cập nhật giá trị trường templateField
+// });

@@ -28,6 +28,8 @@ const profileFacebook = document.getElementById("profile-facebook");
 const profileLinkedIn = document.getElementById("profile-linkedin"); // Thay đổi tham chiếu từ profileZalo thành profileLinkedIn
 const editProfileButton = document.getElementById("edit-profile");
 const deleteProfileButton = document.getElementById("delete-profile");
+const card = document.getElementById("selected-card-detail");
+
 
 const urlParams = new URLSearchParams(window.location.search);
 const profileId = urlParams.get("id");
@@ -41,13 +43,15 @@ if (profileId !== null) {
         .then((snapshot) => {
             if (snapshot.exists()) {
                 const profile = snapshot.val();
+                const templateValue = profile.template
+
                 profileImage.src = profile.image;
                 profileName.textContent = profile.name;
                 profileRole.textContent = profile.roleUser;
                 profilePhone.href = 'tel:' + profile.phone;
                 profileDescription.textContent = profile.description; // Hiển thị trường Description
                 profileFacebook.href = profile.facebook;
-                profileLinkedIn.href = profile.linkedin; // Thay đổi trường zalo thành linkedin
+                profileLinkedIn.href = profile.linkedin;
 
 
                 const tooltipDescription = document.createElement("span");
@@ -128,10 +132,4 @@ if (backButton) {
 }
 
 
-// Trường mô tả hiển thị trong tooltip
-
-
-// Lấy nội dung mô tả ban đầu
-
-// Giới hạn hiển thị mô tả còn 100 ký tự
 

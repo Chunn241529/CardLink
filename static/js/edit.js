@@ -41,7 +41,8 @@ if (profileId !== null) {
                 editProfileForm.elements["description"].value = profile.description; // Thêm trường Description
                 editProfileForm.elements["facebook"].value = profile.facebook;
                 editProfileForm.elements["linkedin"].value = profile.linkedin; // Thay đổi trường zalo thành linkedin
-             
+                editProfileForm.elements["template"].value = profile.template
+
                 // Bắt sự kiện khi bấm nút "Lưu"
                 editProfileForm.addEventListener("submit", (event) => {
                     event.preventDefault();
@@ -53,6 +54,7 @@ if (profileId !== null) {
                         reader.onload = function () {
                             const imageData = reader.result;
                             profile.image = imageData;
+                            profile.template = editProfileForm.elements["template"].value;
                             profile.name = editProfileForm.elements["name"].value;
                             profile.phone = editProfileForm.elements["phone"].value;
                             profile.roleUser = editProfileForm.elements["role-user"].value; // Thêm trường Role User
@@ -63,8 +65,12 @@ if (profileId !== null) {
                             // Sử dụng set() để cập nhật dữ liệu của profile vào Firebase Realtime Database
                             set(child(profilesRef, profileId), profile)
                                 .then(() => {
-                                    console.log("Dữ liệu đã được cập nhật vào Firebase thành công.");
-                                    window.location.href = `detail.html?id=${profileId}`;
+                                    alert("Dữ liệu đã được cập nhật thành công.");
+                                    if (profile.template === 'template1') {
+                                        window.location.href = `detail.html?id=${profileId}`;
+                                    } else if (profile.template === 'template2') {
+                                        window.location.href = `card2.html?id=${profileId}`;
+                                    }
                                 })
                                 .catch((error) => {
                                     console.error("Lỗi khi cập nhật dữ liệu vào Firebase:", error);
@@ -76,6 +82,14 @@ if (profileId !== null) {
                         alert("Vui lòng chọn một tệp hình ảnh.");
                     }
                 });
+                backToDetailButton.addEventListener("click", () => {
+                    if (profile.template === 'template1') {
+                        window.location.href = `detail.html?id=${profileId}`;
+                    } else if (profile.template === 'template2') {
+                        window.location.href = `card2.html?id=${profileId}`;
+                    }
+
+                });
             } else {
                 console.error("Không tìm thấy dữ liệu của profile.");
             }
@@ -85,7 +99,5 @@ if (profileId !== null) {
         });
 
     // Thêm sự kiện khi bấm nút "Quay lại Chi tiết Profile"
-    backToDetailButton.addEventListener("click", () => {
-        window.location.href = `detail.html?id=${profileId}`;
-    });
+
 }

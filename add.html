@@ -37,8 +37,21 @@
         <label for="linkedin">LinkedIn:</label>
         <input type="text" id="linkedin" name="linkedin"><br>
 
+        <label for="template">Chọn mẫu thẻ:</label>
+        <select id="template" name="template">
+            <option value="template1">Mẫu thẻ 1</option>
+            <option value="template2">Mẫu thẻ 2</option>
+            <!-- Thêm các mẫu thẻ khác (nếu cần) -->
+        </select><br>
+
+        <!-- Trường ẩn để lưu giá trị template -->
+        <input type="hidden" id="templateField" name="templateField" value="">
+
         <button type="submit">Add</button>
         <!-- <button id="back-to-detail">Back</button> -->
+        <!-- Thêm vào trang "add.html" -->
+
+
     </form>
 
     <script type="module" src="./static/js/add.js"></script>

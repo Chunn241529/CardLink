@@ -52,7 +52,12 @@ function displayProfiles() {
             // Tên
             const nameCell = row.insertCell(1);
             const nameLink = document.createElement("a");
-            nameLink.href = `detail.html?id=${key}`;
+            if (profile.template === 'template1') {
+                nameLink.href = `detail.html?id=${key}`;
+            } else if (profile.template === 'template2'){
+                nameLink.href = `card2.html?id=${key}`;
+            }
+            
             nameLink.textContent = profile.name;
             nameCell.appendChild(nameLink);
 
