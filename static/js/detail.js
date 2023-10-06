@@ -49,6 +49,28 @@ if (profileId !== null) {
                 profileFacebook.href = profile.facebook;
                 profileLinkedIn.href = profile.linkedin; // Thay đổi trường zalo thành linkedin
 
+
+                const tooltipDescription = document.createElement("span");
+                tooltipDescription.className = "tooltiptext";
+                // Lấy nội dung mô tả ban đầu
+                const descriptionContent = profileDescription.textContent;
+                const maxLength = 75;
+                if (descriptionContent.length > maxLength) {
+                    const truncatedDescription = descriptionContent.substring(0, maxLength) + "...";
+                    profileDescription.textContent = truncatedDescription;
+                    tooltipDescription.textContent = descriptionContent;
+                    profileDescription.appendChild(tooltipDescription);
+                    profileDescription.classList.add("tooltip");
+                }
+
+                profileDescription.addEventListener("mouseover", function () {
+                    tooltipDescription.style.visibility = "visible";
+                });
+
+                profileDescription.addEventListener("mouseout", function () {
+                    tooltipDescription.style.visibility = "hidden";
+                });
+
                 editProfileButton.addEventListener("click", () => {
                     window.location.href = `edit.html?id=${profileId}`;
                 });
@@ -104,4 +126,12 @@ if (backButton) {
         window.location.href = "index.html";
     });
 }
+
+
+// Trường mô tả hiển thị trong tooltip
+
+
+// Lấy nội dung mô tả ban đầu
+
+// Giới hạn hiển thị mô tả còn 100 ký tự
 

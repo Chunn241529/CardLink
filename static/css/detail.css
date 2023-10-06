@@ -79,7 +79,6 @@ p {
     height: 280px;
     padding: 40px 20px 30px 20px;
     display: inline-block;
-    float: left;
     border-right: 2px dashed #EEEEEE;
     background: #FFFFFF;
     color: #000000;
@@ -486,7 +485,7 @@ p {
     .profile-card header {
         width: auto;
         height: auto;
-        padding: 30px 20px;
+        padding: 20px 20px;
         display: block;
         float: none;
         border-right: none;
@@ -546,7 +545,8 @@ p {
     width: 100%;
     height: 100%;
     margin: auto;
-    
+
+
 }
 
 .modal {
@@ -595,4 +595,39 @@ p {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+#myBtn {
+    margin: auto;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+/* CSS cho tooltip */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
 }
