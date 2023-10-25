@@ -36,7 +36,7 @@ const profileId = urlParams.get("id");
 
 if (profileId !== null) {
     // Tham chiếu đến địa chỉ Firebase Realtime Database của profile
-    const profileRef = ref(database, `profiles/${profileId}`);
+    const profileRef = ref(database, `users/${profileId}`);
 
     // Truy xuất dữ liệu từ Firebase Realtime Database
     get(profileRef)
